@@ -1,0 +1,13 @@
+from system import simplefig;
+from system import random;
+//this is a comment
+sys.out('------------V0.2------------');
+sys.out('type sys.out to print to the console');
+sys.out('------------V0.5------------');
+out('you can use out if you have simplefig');
+sys.in('You can take input');
+in('You can do it with simplefig too');
+sys.wait(2);
+out('you can wait some seconds');
+wait(2);
+out('you can use it with simple fig too');
