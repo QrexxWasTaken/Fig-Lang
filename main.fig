@@ -11,3 +11,6 @@ sys.wait(2);
 out('you can wait some seconds');
 wait(2);
 out('you can use it with simple fig too');
+out('You can generate random strings and integers');
+random.str();
+random.int();

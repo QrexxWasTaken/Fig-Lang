@@ -1,7 +1,7 @@
 import random
 from time import sleep
 import os
-sfv = "0.2"
+sfv = "0.7"
 kb = ["45","355","133","448","846"]
 
 def load():
