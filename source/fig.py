@@ -61,14 +61,14 @@ def line(line):
                 exit()
         else:
             print("Unknown function 'out'")
-    elif "sys.in" in line:
+    elif "sys.input" in line:
         linefinal = line.split("'")
         if ";" in linefinal[2]:
             var = input(linefinal[1] + "\n")
             print(var)
         else:
             print("error. ; (semicolon) missing.")
-    elif "in" in line:
+    elif "input" in line:
         if simplefig == 1:
             linefinal = line.split("'")
             if ";" in linefinal[2]:
