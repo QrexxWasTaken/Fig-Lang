@@ -1,17 +1,21 @@
 import os, sys, random, string
 from source import simplefigloader
 from source import randomloader
+from source import mathloader
 from time import sleep
 global figversion
-figversion = "0.5"
+figversion = "1.0.0"
 global simplefig
 simplefig = 0
 global randomimport
 randomimport = 0
+global mathimport
+mathimport = 0
 
 def line(line):
     global randomimport
     global simplefig
+    global mathimport
     if "//" in line:
         None
     elif "from system" in line:
@@ -21,13 +25,19 @@ def line(line):
                 simpfig = 1
                 simplefig = simpfig
             else:
-                print("Error: SimpleFig Alliney imported")
+                print("Error: SimpleFig Already imported")
         elif 'import random' in line:
             if randomimport == 0:
                 print(f"Imported Random version {randomloader.rv} from Fig System")
                 randomimport = 1
             else:
                 print(f"Error: Random Already imported")
+        elif "import math" in line:
+            if mathimport == 0:
+                print(f"Imported Math version {mathloader.mv} from Fig System")
+                mathimport = 1
+            else:
+                print("Error: Math Already imported")
     elif "import" in line:
         if "simplefig" in line:
             simpfig = simplefig
@@ -42,6 +52,13 @@ def line(line):
             if imprand == 0:
                 randomloader.load()
                 randomimport = 1
+            else:
+                print("Error: Random is already imported")
+        elif "math" in line:
+            impmath = mathimport
+            if impmath == 0:
+                mathloader.load()
+                mathimport = 1
             else:
                 print("Error: Random is already imported")
     elif "sys.out" in line:
@@ -124,6 +141,111 @@ def line(line):
                     print(''.join(random.choice(string.ascii_lowercase) for i in range(12)))
         else:
             print("Unknown function 'str'")
+    elif "math.add" in line:
+        if mathimport == 1:
+            linefinal = line.split("(")
+            if ";" in linefinal[1]:
+                linerfinal = linefinal[1].split(")")
+                lineerfinal = linerfinal[0].split(",")
+                print(int(lineerfinal[0])+int(lineerfinal[1]))
+        else:
+            print("Unknown function 'math.add'")
+    elif "math.sub" in line:
+        if mathimport == 1:
+            linefinal = line.split("(")
+            if ";" in linefinal[1]:
+                linerfinal = linefinal[1].split(")")
+                lineerfinal = linerfinal[0].split(",")
+                print(int(lineerfinal[0])-int(lineerfinal[1]))
+        else:
+            print("Unknown function 'math.sub'")
+    elif "math.div" in line:
+        if mathimport == 1:
+            linefinal = line.split("(")
+            if ";" in linefinal[1]:
+                linerfinal = linefinal[1].split(")")
+                lineerfinal = linerfinal[0].split(",")
+                print(int(lineerfinal[0])/int(lineerfinal[1]))
+        else:
+            print("Unknown function 'math.div'")
+    elif "math.mult" in line:
+        if mathimport == 1:
+            linefinal = line.split("(")
+            if ";" in linefinal[1]:
+                linerfinal = linefinal[1].split(")")
+                lineerfinal = linerfinal[0].split(",")
+                print(int(lineerfinal[0])*int(lineerfinal[1]))
+        else:
+            print("Unknown function 'math.mult'")
+    elif "mult" in line:
+        if simplefig == 1:
+            if mathimport == 1:
+                linefinal = line.split("(")
+                if ";" in linefinal[1]:
+                    linerfinal = linefinal[1].split(")")
+                    lineerfinal = linerfinal[0].split(",")
+                    print(int(lineerfinal[0])*int(lineerfinal[1]))
+            else:
+                print("Unknown function 'mult'")
+        else:
+            print("Unknown function 'mult'")
+    elif "div" in line:
+        if simplefig == 1:
+            if mathimport == 1:
+                linefinal = line.split("(")
+                if ";" in linefinal[1]:
+                    linerfinal = linefinal[1].split(")")
+                    lineerfinal = linerfinal[0].split(",")
+                    print(int(lineerfinal[0])/int(lineerfinal[1]))
+            else:
+                print("Unknown function 'div'")
+        else:
+            print("Unknown function 'div'")
+    elif "add" in line:
+        if simplefig == 1:
+            if mathimport == 1:
+                linefinal = line.split("(")
+                if ";" in linefinal[1]:
+                    linerfinal = linefinal[1].split(")")
+                    lineerfinal = linerfinal[0].split(",")
+                    print(int(lineerfinal[0])+int(lineerfinal[1]))
+            else:
+                print("Unknown function 'add'")
+        else:
+            print("Unknown function 'add'")
+    elif "sub" in line:
+        if simplefig == 1:
+            if mathimport == 1:
+                linefinal = line.split("(")
+                if ";" in linefinal[1]:
+                    linerfinal = linefinal[1].split(")")
+                    lineerfinal = linerfinal[0].split(",")
+                    print(int(lineerfinal[0])+int(lineerfinal[1]))
+            else:
+                print("Unknown function 'sub'")
+        else:
+            print("Unknown function 'sub'")
+    elif "math.pow" in line:
+        if mathimport == 1:
+            linefinal = line.split("(")
+            if ";" in linefinal[1]:
+                linerfinal = linefinal[1].split(")")
+                lineerfinal = linerfinal[0].split(",")
+                print(int(lineerfinal[0])**int(lineerfinal[1]))
+        else:
+            print("Unknown function 'math.pow'")
+    elif "pow" in line:
+        if simplefig == 1:
+            if mathimport == 1:
+                linefinal = line.split("(")
+                if ";" in linefinal[1]:
+                    linerfinal = linefinal[1].split(")")
+                    lineerfinal = linerfinal[0].split(",")
+                    print(int(lineerfinal[0])**int(lineerfinal[1]))
+            else:
+                print("Unknown function 'pow'")
+        else:
+            print("Unknown function 'pow'")
 class compile:
     file = open("main.fig","r").read()
     file = file.split("\n")
