@@ -1,32 +1,11 @@
-from system import simplefig;
-from system import random;
 from system import math;
-//this is a comment
-sys.out('------------V0.2------------');
-sys.out('type sys.out to print to the console');
-sys.out('------------V0.5------------');
-out('you can use out if you have simplefig');
-sys.input('You can take input');
-input('You can do it with simplefig too');
-sys.wait(2);
-out('you can wait some seconds');
-wait(2);
-out('you can use it with simple fig too');
-out('You can generate random strings and integers');
-random.str();
-random.int();
-out('You can use simplefig too');
-str();
-int();
-out('You can do math');
 math.add(1,1);
 math.sub(2,1);
+math.mult(2,1);
 math.div(9,3);
-math.mult(3,3);
-math.pow(5,2);
-out('Of course you can use simplefig too');
-add(1,1);
-sub(2,1);
-div(9,3);
-mult(3,3);
-pow(5,2);
+math.pow(5,6);
+sys.setvar(uno,1);
+sys.getvar(uno);
+if[sys.getvar(uno)==1]{
+
+}

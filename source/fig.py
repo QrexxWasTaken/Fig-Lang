@@ -4,7 +4,7 @@ from source import randomloader
 from source import mathloader
 from time import sleep
 global figversion
-figversion = "1.0.0"
+figversion = "1.1.0"
 global simplefig
 simplefig = 0
 global randomimport
@@ -12,10 +12,21 @@ randomimport = 0
 global mathimport
 mathimport = 0
 
+global inIf
+inIf = False
+
+variables = {
+
+}
+
+def addvar(name,value):
+    variables[name] = value
+
 def line(line):
     global randomimport
     global simplefig
     global mathimport
+    global inIf
     if "//" in line:
         None
     elif "from system" in line:
@@ -61,6 +72,7 @@ def line(line):
                 mathimport = 1
             else:
                 print("Error: Random is already imported")
+    
     elif "sys.out" in line:
         linefinal = line.split("'")
         if ";" in linefinal[2]:
@@ -112,6 +124,65 @@ def line(line):
                 print("Error. ; (semicolon) missing")
         else:
             print("unrecognized function 'wait'")
+    elif "sys.setvar" in line:
+        linefinal = line.split("(")
+        lineefinal = linefinal[1].split(",")
+        lineerfinal = lineefinal[1].split(")")
+        linerfinal = [lineerfinal,lineefinal[0]]
+        if ";" in linerfinal[0][1]:
+            addvar(str(linerfinal[1]),str(linerfinal[0][0]))
+            print("Set variable",'"'+str(linerfinal[1])+'"',"to",variables[str(linerfinal[1])])
+        else:
+            print("Error: missing ; (semicolon)")
+    elif "setvar" in line:
+        if simplefig == 1:
+            linefinal = line.split("(")
+            lineefinal = linefinal[1].split(",")
+            lineerfinal = lineefinal[1].split(")")
+            linerfinal = [lineerfinal,lineefinal[0]]
+            if ";" in linerfinal[0][1]:
+                addvar(str(linerfinal[1]),str(linerfinal[0][0]))
+                print("Set variable",'"'+str(linerfinal[1])+'"',"to",variables[str(linerfinal[1])])
+            else:
+                print("Error: missing ; (semicolon)")
+        else:
+            print("Unknown function 'setvar'")
+    elif "sys.getvar" in line:
+        linefinal = line.split("(")
+        lineefinal = linefinal[1].split(")")
+        if ";" in lineefinal[1]:
+            print(variables[lineefinal[0]])
+        else:
+            print("Error: missing ; (semicolon)")
+    elif "getvar" in line:
+        if simplefig == 1:
+            linefinal = line.split("(")
+            lineefinal = linefinal[1].split(")")
+            if ";" in lineefinal[1]:
+                print(variables[lineefinal[0]])
+            else:
+                print("Error: missing ; (semicolon)")
+        else:
+            print("Unknown function 'getvar'") 
+    elif "sys.vars" in line:
+        if ";" in line:
+            print("Defined Variables:")
+            for i in variables:
+                print(str(i)+": "+str(variables[i]))
+            print("")
+        else:
+            print("Error: missing ';' (semicolon)")
+    elif "vars" in line:
+        if simplefig == 1:
+            if ";" in line:
+                print("Defined Variables:")
+                for i in variables:
+                    print(str(i)+": "+str(variables[i]))
+                print("")
+            else:
+                print("Error: missing ';' (semicolon)")
+        else:
+            print("Unknown function 'vars'")
     elif "random.int" in line:
         if randomimport == 1:
             if ";" in line:
